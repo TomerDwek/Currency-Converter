@@ -1,19 +1,20 @@
 const mongoose = require('mongoose');
 
 const currencyRateSchema = new mongoose.Schema({
-    currencyID: {
+    _id: mongoose.Schema.Types.ObjectId,
+    currencyISOCode: {
         type: String,
         required: true
     },
     rateDate: {
-        type: Date,
+        type: Number,
         default: Date.now,
     },
-    rateInDollars: {
+    rate: {
         type: Number,
         required: true
     },
-    currencyRateSourceBank: {
+    sourceBankID: {
         type: String,
         required: true
     }
