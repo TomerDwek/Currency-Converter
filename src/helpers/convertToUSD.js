@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-const Currency = require('../models/currency');
 const Bank = require('../models/bank')
 const CurrencyRate = require('../models/currencyRate')
 
@@ -54,8 +53,6 @@ const convertToUSD = async () => {
 
         await createRateToUSD(USABank._id, bank.baseCurrency, minRate);        
     }
-
-    console.log(await CurrencyRate.find({ sourceBankID: USABank._id }))
 }
 
 module.exports = convertToUSD;
