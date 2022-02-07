@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { StatusBar, FlatList, View, StyleSheet } from 'react-native';
 import { Entypo } from '@expo/vector-icons';
 
@@ -6,6 +6,8 @@ import colors from '../constants/colors';
 import currencies from "../data/currencies.json"
 import { RowItem, RowSeperator } from "../components/RowItem";
 import { ConversionContext } from '../util/ConversionContext';
+
+const currenciesURL = "http://172.31.112.1:3000/currencies";
 
 const styles = StyleSheet.create({
   icon: {
@@ -19,14 +21,29 @@ const styles = StyleSheet.create({
 })
 
 export default ({ navigation, route = {} }) => {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
   const params = route.params || {};
   const { setBaseCurrency, setQuoteCurrency, baseCurrency, quoteCurrency } = useContext(ConversionContext);
+
+  useEffect(() => {
+    fetch(currenciesURL)
+    .then((response) => response.json())
+    .catch((error) => alert(error))
+    .then(json => {
+      console.log(json)
+      setData(json)})
+    .catch((error) => alert(error))
+    .finally(setLoading(false));
+  },[])
 
   return (
     <View style={{ backgroundColor: colors.white }}>
       <StatusBar barStyle="dark-content" backgroundColor={colors.white} />
       <FlatList 
-        data={currencies}
+        data={data}
+        keyExtractor={(_id, index) => _id}
         renderItem={({ item }) => {
           let selected = false;
           if (params.isBaseCurrency && item === baseCurrency) {
@@ -37,7 +54,7 @@ export default ({ navigation, route = {} }) => {
 
           return (
             <RowItem 
-              text={item} 
+              text={item.isoCode} 
               onPress={() => {
                 if (params.isBaseCurrency) {
                   setBaseCurrency(item)
@@ -56,7 +73,6 @@ export default ({ navigation, route = {} }) => {
             />
           );
         }}
-        keyExtractor = {(item) => item}
         ItemSeparatorComponent={() => <RowSeperator />}
       />
     </View>
