@@ -11,27 +11,10 @@ export const api = (_path = "") => {
         return Promise.reject(new Error('Invalid Path.'))
     }
 
-    // [/latest?base=, USD]
     const baseCurrency = _path.split('base=')[1]
 
     return Promise.resolve({
         base: baseCurrency,
         date: format(new Date(), 'yyyy-MM-dd'),
-        // rates: {
-        //     [baseCurrency]: 1,
-        // }
     })
-
-    // return new Promise(resolve => {
-    //     setTimeout(() => {
-    //         resolve({
-    //             base: baseCurrency,
-    //             date: format(new Date(), 'yyyy-MM-dd'),
-    //             rates: {
-    //                 ...SAMPLE_RATES,
-    //                 [baseCurrency]: 1,
-    //             }
-    //         })
-    //     }, 1500)
-    // })
 }

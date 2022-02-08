@@ -12,7 +12,7 @@
 ## Running
 
 #### For Server
-Run `node server/server.js`
+Run `node server/app.js`
 
 #### For Client
 1. Run `cd client`

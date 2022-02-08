@@ -1,4 +1,33 @@
 import React from 'react';
-import Navigation from './config/Navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default () => <Navigation />;
+import Home from './screens/Home';
+import CurrencyList from './screens/CurrencyList';
+import { ConversionContextProvider } from './util/ConversionContext';
+
+const MainStack = createStackNavigator();
+const MainStackScreen = () => (
+  <MainStack.Navigator >
+    <MainStack.Screen
+      name="Home"
+      component={Home}
+      options={{ headerShown: false }}
+    />
+    <MainStack.Screen 
+      name="CurrencyList" 
+      component={CurrencyList} 
+      options={({ route }) => ({
+        title: route.params && route.params.title,
+      })}
+    />
+  </MainStack.Navigator>
+);
+
+export default () => (
+  <NavigationContainer>
+    <ConversionContextProvider>
+      <MainStackScreen />
+    </ConversionContextProvider>
+  </NavigationContainer>
+);
