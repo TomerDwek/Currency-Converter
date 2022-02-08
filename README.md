@@ -1,4 +1,7 @@
 ﻿# Currency-Converter
+ <p align="center">
+ <img width=400 height=600 src="https://user-images.githubusercontent.com/59745744/152994498-a7749b47-eaa1-424d-8a6c-9e97a66e5b13.png" />
+ </p>
  
  ## Installation
 
