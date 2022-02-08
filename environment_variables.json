@@ -1,3 +1,0 @@
-{
-    "connectionString": "mongodb+srv://rewire:rewire@currency-converter.ugu30.mongodb.net/currencyConverter?retryWrites=true&w=majority"  
-}
