@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { 
     View, 
     StyleSheet, 
@@ -9,12 +9,14 @@ import {
     ActivityIndicator
 } from 'react-native';
 import { format } from 'date-fns';
+import Constants from "expo-constants";
 
 import colors from "../constants/colors";
 import { ConversionInput } from "../components/ConversionInput";
 import { Button } from "../components/Button";
 import { ConversionContext } from "../util/ConversionContext";
 
+const { manifest } = Constants;
 const screen = Dimensions.get('window')
 
 const styles = StyleSheet.create({
@@ -62,16 +64,35 @@ const styles = StyleSheet.create({
 
 export default ( { navigation }) => {
     const [value, setValue] = useState('100');
+    // const [isLoading, setLoading] = useState(true);
+
     const { 
         baseCurrency, 
         quoteCurrency, 
         swapCurrencies, 
         date, 
-        rates,
         isLoading
     } = useContext(ConversionContext)
 
-    const conversionRate = rates[quoteCurrency]
+    const convertionURL = `http://${manifest.debuggerHost.split(':').shift()}:3000/convert/${baseCurrency}/${quoteCurrency}`;
+    const [conversionRate, setConversionRate] = useState([]);
+
+    fetch(convertionURL)
+    .then((response) => response.json())
+    .then(json => setConversionRate(json.rate))
+    .catch((error) => alert(error))
+    // .finally(setLoading(false));
+
+    // useEffect(() => {
+    //     fetch(convertionURL)
+    //       .then((response) => response.json())
+    //       .catch((error) => alert(error))
+    //       .then(json => {
+    //           console.log(json)
+    //         setConversionRate(json.rate)
+    //       })
+    //       .catch((error) => alert(error))
+    //   }, [])
 
     return (
         <View style={styles.container}>
@@ -124,7 +145,7 @@ export default ( { navigation }) => {
                         />
             
                         <Text style={styles.text}>
-                            {`1 ${baseCurrency} = ${conversionRate} ${quoteCurrency} as of ${
+                            {`1 ${baseCurrency} = ${Number(conversionRate).toFixed(4)} ${quoteCurrency} as of ${
                                 date && format(new Date(date), 'MMMM do, yyyy')
                             }.`}
                         </Text>

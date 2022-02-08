@@ -31,7 +31,6 @@ export default ({ navigation, route = {} }) => {
   useEffect(() => {
     fetch(currenciesURL)
     .then((response) => response.json())
-    .catch((error) => alert(error))
     .then(json => {
       setCurrencies(json)})
     .catch((error) => alert(error))

@@ -19,7 +19,7 @@ const convert = async (baseCurrency, quoteCurrency) => {
 
     const convertion = (1 / USDtoBaseCurrency.rate) * USDtoQuoteCurrency.rate;
 
-    return convertion;
+    return Number(convertion).toFixed(8);
 }
 
 module.exports = convert;
