@@ -5,8 +5,8 @@ import { api } from './api';
 
 export const ConversionContext = createContext();
 
-const DEFAULT_BASE_CURRENCY = 'USD';
-const DEFAULT_QUOTE_CURRENCY = 'GBP';
+const DEFAULT_BASE_CURRENCY = 'ILS';
+const DEFAULT_QUOTE_CURRENCY = 'USD';
 
 export const ConversionContextProvider = ({ children }) => {
   const [baseCurrency, _setBaseCurrency] = useState(DEFAULT_BASE_CURRENCY);

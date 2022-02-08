@@ -95,9 +95,13 @@ router.get('/:bankID', async (req, res, next) => {
 
     Bank.findById(id)
         .exec()
-        .then(doc => {
+        .then(async doc => {
             if (doc) {
-                res.status(200).json(doc);
+                const rates = await CurrencyRate.find({ sourceBankID: doc._id })
+                res.status(200).json({
+                    bank: doc,
+                    rates: rates
+                });
             } else {
                 res.status(404)
                 .json({ message: "No valid entry found for provided ID" });

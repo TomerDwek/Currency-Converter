@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-const environment_variables = require('../environment_variables.json');
+const environment_variables = require('./environment_variables.json');
 const currencyRoutes = require('./routers/currency');
 const bankRoutes = require('./routers/bank');
 const currencyRateRoutes = require('./routers/currencyRate');
