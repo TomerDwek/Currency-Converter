@@ -1,6 +1,6 @@
 ﻿# Currency-Converter
  <p align="center">
- <img src="https://user-images.githubusercontent.com/59745744/152994498-a7749b47-eaa1-424d-8a6c-9e97a66e5b13.png" />
+ <img src="https://user-images.githubusercontent.com/59745744/156164503-14221e55-50d8-4bbd-8474-72680749548d.gif" />
  </p>
  
  ## Installation
