@@ -19,6 +19,7 @@ To run the application you need to create a file named `environment_variables.js
 Run `node server/app.js`
 
 #### For Client
-1. Run `cd client`
-2. Run `expo start`
-3. Scan the QR code with Expo Go app (Android) or with Camera app (iOS)
+1. Open new terminal
+2. Run `cd client`
+3. Run `expo start`
+4. Scan the QR code with Expo Go app (Android) or with Camera app (iOS)
